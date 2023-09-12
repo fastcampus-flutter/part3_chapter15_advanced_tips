@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:fast_app_base/common/theme/custom_theme_app.dart';
 import 'package:flutter/material.dart';
 import 'package:timeago/timeago.dart';
 
@@ -16,5 +17,5 @@ void main() async {
       fallbackLocale: const Locale('ko'),
       path: 'assets/translations',
       useOnlyLangCode: true,
-      child: const App()));
+      child: const CustomThemeApp(child: App())));
 }

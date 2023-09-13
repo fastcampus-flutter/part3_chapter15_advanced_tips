@@ -174,7 +174,6 @@ class _ImageSelectWidget extends StatelessWidget {
     this.imageList, {
     required this.onTap,
     required this.onTapDeleteImage,
-    super.key,
   });
 
   @override
@@ -335,7 +334,7 @@ class _PriceEditorState extends State<_PriceEditor> {
           controller: widget.controller,
           keyboardType: TextInputType.number,
           enabled: !isDonateMode,
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
               hintText: '￦ 가격을 입력해주세요.',
               focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(

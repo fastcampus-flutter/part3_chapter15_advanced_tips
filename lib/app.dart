@@ -1,11 +1,10 @@
 import 'package:fast_app_base/auth.dart';
 import 'package:fast_app_base/common/common.dart';
-import 'package:fast_app_base/common/theme/custom_theme_app.dart';
 import 'package:fast_app_base/common/widget/w_round_button.dart';
 import 'package:fast_app_base/entity/post/vo_simple_product_post.dart';
 import 'package:fast_app_base/screen/main/s_main.dart';
 import 'package:fast_app_base/screen/main/tab/tab_item.dart';
-import 'package:fast_app_base/screen/post_detail/s_post_detail.dart';
+import 'package:fast_app_base/screen/post_detail_riverpod/s_post_detail_with_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -108,12 +107,12 @@ class AppState extends State<App> with WidgetsBindingObserver, Nav {
               final String postId = state.pathParameters['postId']!;
               if (state.extra != null) {
                 final post = state.extra as SimpleProductPost;
-                return PostDetailScreen(
+                return PostDetailScreenWithRiverpod(
                   int.parse(postId),
                   simpleProductPost: post,
                 );
               } else {
-                return PostDetailScreen(int.parse(postId));
+                return PostDetailScreenWithRiverpod(int.parse(postId));
               }
             },
           ),

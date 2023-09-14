@@ -117,7 +117,6 @@ class MainScreenState extends ConsumerState<MainScreen> with SingleTickerProvide
   }
 
   Widget _buildBottomNavigationBar(BuildContext context) {
-    print(context.viewPaddingBottom);
     return Container(
       height: bottomNavigationBarHeight + context.viewPaddingBottom,
       decoration: const BoxDecoration(

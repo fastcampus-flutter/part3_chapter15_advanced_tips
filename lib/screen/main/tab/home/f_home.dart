@@ -1,5 +1,4 @@
 import 'package:fast_app_base/common/common.dart';
-import 'package:fast_app_base/entity/dummies.dart';
 import 'package:fast_app_base/screen/main/fab/w_floating_daangn_button.dart';
 import 'package:fast_app_base/screen/main/fab/w_floating_daangn_button.riverpod.dart';
 import 'package:fast_app_base/screen/main/tab/home/provider/post_provider.dart';
@@ -57,7 +56,7 @@ class _HomeFragmentState extends ConsumerState<HomeFragment> {
             actions: [
               IconButton(
                 onPressed: () {
-                  Nav.push(NotificationScreen());
+                  Nav.push(const NotificationScreen());
                 },
                 icon: const Icon(Icons.notifications_none_rounded),
               )

@@ -10,7 +10,8 @@ import 'package:fast_app_base/entity/product/product_status.dart';
 import 'package:fast_app_base/entity/user/vo_address.dart';
 import 'package:fast_app_base/screen/dialog/d_message.dart';
 import 'package:fast_app_base/screen/main/tab/home/provider/post_provider.dart';
-import 'package:fast_app_base/screen/post_detail/s_post_detail.dart';
+import 'package:fast_app_base/screen/post_detail_riverpod/s_post_detail_with_riverpod.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -96,7 +97,9 @@ class _WriteScreenState extends ConsumerState<WriteScreen> with KeyboardDetector
 
                   catch (e) {
                     //사진 권한이 필요해요 -> 앱 설정으로
-                    print(e);
+                    if (kDebugMode) {
+                      print(e);
+                    }
                   }
                 },
               ),
@@ -126,7 +129,6 @@ class _WriteScreenState extends ConsumerState<WriteScreen> with KeyboardDetector
               onTap: () {
                 final title = titleController.text;
                 final price = int.parse(priceController.text);
-                final desc = descriptionController.text;
                 setState(() {
                   isLoading = true;
                 });
@@ -142,14 +144,14 @@ class _WriteScreenState extends ConsumerState<WriteScreen> with KeyboardDetector
                       imageList,
                     ),
                     title,
-                    Address('서울시 다트구 플러터동', '플러터동'),
+                    const Address('서울시 다트구 플러터동', '플러터동'),
                     0,
                     0,
                     DateTime.now());
                 ref.read(postProvider.notifier).state = List.of(list)..add(simpleProductPost);
                 Nav.pop(context);
                 Nav.push(
-                  PostDetailScreen(
+                  PostDetailScreenWithRiverpod(
                     simpleProductPost.id,
                     simpleProductPost: simpleProductPost,
                   ),
@@ -206,7 +208,7 @@ class _ImageSelectWidget extends StatelessWidget {
                           },
                           child: Transform.rotate(
                             angle: pi / 4,
-                            child: Icon(Icons.add_circle),
+                            child: const Icon(Icons.add_circle),
                           ).pOnly(left: 30, bottom: 30),
                         ),
                       ),
@@ -240,11 +242,11 @@ class SelectImageButton extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.camera_alt),
+            const Icon(Icons.camera_alt),
             RichText(
                 text: TextSpan(children: [
-              TextSpan(text: imageList.length.toString(), style: TextStyle(color: Colors.orange)),
-              TextSpan(text: '/10')
+              TextSpan(text: imageList.length.toString(), style: const TextStyle(color: Colors.orange)),
+              const TextSpan(text: '/10')
             ])),
           ],
         ).box.rounded.border(color: Colors.grey).make(),
@@ -256,7 +258,7 @@ class SelectImageButton extends StatelessWidget {
 class _TitleEditor extends StatelessWidget {
   final TextEditingController controller;
 
-  _TitleEditor(this.controller);
+  const _TitleEditor(this.controller);
 
   @override
   Widget build(BuildContext context) {
@@ -267,7 +269,7 @@ class _TitleEditor extends StatelessWidget {
         height5,
         TextField(
           controller: controller,
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
               hintText: '제목',
               focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(
@@ -286,7 +288,7 @@ class _TitleEditor extends StatelessWidget {
 class _PriceEditor extends StatefulWidget {
   final TextEditingController controller;
 
-  _PriceEditor(this.controller);
+  const _PriceEditor(this.controller);
 
   @override
   State<_PriceEditor> createState() => _PriceEditorState();
@@ -353,7 +355,7 @@ class _PriceEditorState extends State<_PriceEditor> {
 class _DescEditor extends StatelessWidget {
   final TextEditingController controller;
 
-  _DescEditor(this.controller);
+  const _DescEditor(this.controller);
 
   @override
   Widget build(BuildContext context) {
@@ -365,7 +367,7 @@ class _DescEditor extends StatelessWidget {
         TextField(
           controller: controller,
           maxLines: 7,
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
               hintText: '에 올릴 게시글 내용을 작성해주세요.',
               focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(

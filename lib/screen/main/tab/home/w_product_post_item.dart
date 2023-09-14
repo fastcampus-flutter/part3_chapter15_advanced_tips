@@ -1,10 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/entity/post/vo_simple_product_post.dart';
+import 'package:fast_app_base/screen/post_detail_riverpod/s_post_detail_with_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:timeago/timeago.dart' as timeago;
-
-import '../../../post_detail/s_post_detail.dart';
 
 class ProductPostItem extends StatelessWidget {
   final SimpleProductPost post;
@@ -18,7 +17,7 @@ class ProductPostItem extends StatelessWidget {
         //context.go('/main/localLife/${post.id}', extra: post);
 
         Nav.push(
-            PostDetailScreen(
+            PostDetailScreenWithRiverpod(
               post.id,
               simpleProductPost: post,
             ),
@@ -39,7 +38,7 @@ class ProductPostItem extends StatelessWidget {
                   ),
                 ),
               ),
-              Width(10),
+              const Width(10),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

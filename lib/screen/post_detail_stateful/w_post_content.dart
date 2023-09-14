@@ -32,7 +32,7 @@ class PostContent extends StatelessWidget {
             .color(context.appColors.lessImportant)
             .make(),
         if (productPost == null)
-          Center(
+          const Center(
             child: CircularProgressIndicator(),
           ),
         if (productPost != null) productPost!.content.text.make().pOnly(top: 30, bottom: 60),

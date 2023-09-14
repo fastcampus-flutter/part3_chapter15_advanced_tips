@@ -38,7 +38,7 @@ class NotificationScreen extends HookConsumerWidget {
           Expanded(child: TabBarView(
             controller: tabController,
             children: [
-              NotificationFragment(),
+              const NotificationFragment(),
             Container(color: Colors.red,),
 
           ],)),

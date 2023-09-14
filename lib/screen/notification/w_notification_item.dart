@@ -53,7 +53,7 @@ class _NotificationItemWidgetState extends ConsumerState<NotificationItemWidget>
                         list.remove(widget.notification);
                         ref.read(notificationProvider.notifier).state = List.of(list);
                       },
-                      icon: Icon(Icons.delete))
+                      icon: const Icon(Icons.delete))
               ],
             ),
             height10,

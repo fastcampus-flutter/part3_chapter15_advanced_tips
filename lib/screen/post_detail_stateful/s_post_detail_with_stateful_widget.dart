@@ -1,11 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:fast_app_base/common/cli_common.dart';
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/common/widget/w_round_button.dart';
 import 'package:fast_app_base/entity/post/vo_product_post.dart';
 import 'package:fast_app_base/entity/post/vo_simple_product_post.dart';
 import 'package:fast_app_base/entity/product/vo_product.dart';
-import 'package:fast_app_base/screen/post_detail_stateful/state/post_state.dart';
+import 'package:fast_app_base/screen/post_detail_stateful/post_id_provided_screen.dart';
+import 'package:fast_app_base/screen/post_detail_stateful/state/product_post_state.dart';
 import 'package:fast_app_base/screen/post_detail_stateful/w_post_content.dart';
 import 'package:fast_app_base/screen/post_detail_stateful/w_user_profile.dart';
 import 'package:flutter/material.dart';
@@ -14,11 +14,30 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../common/widget/w_vertical_line.dart';
-import '../../data/network/daangn_api.dart';
-import '../../entity/dummies.dart';
 
-class PostDetailScreenWithStatefulWidget extends ConsumerStatefulWidget {
+class DetailScreen extends StatefulWidget implements PostIdProvidedScreen {
+  @override
+  final int id;
+
+  const DetailScreen(this.id, {super.key});
+
+  @override
+  State<StatefulWidget> createState() {
+    return DetailScreenState();
+  }
+}
+
+class DetailScreenState extends State<DetailScreen> with ProductPostState {
+  @override
+  Widget build(BuildContext context) {
+    return productPost == null ? const CircularProgressIndicator() : productPost!.content.text.make();
+  }
+}
+
+class PostDetailScreenWithStatefulWidget extends ConsumerStatefulWidget
+    implements PostIdProvidedScreen {
   final SimpleProductPost? simpleProductPost;
+  @override
   final int id;
 
   const PostDetailScreenWithStatefulWidget(
@@ -31,9 +50,8 @@ class PostDetailScreenWithStatefulWidget extends ConsumerStatefulWidget {
   ConsumerState createState() => _PostDetailScreenState();
 }
 
-class _PostDetailScreenState extends ConsumerState<PostDetailScreenWithStatefulWidget> with PostState<PostDetailScreenWithStatefulWidget> {
-
-
+class _PostDetailScreenState extends ConsumerState<PostDetailScreenWithStatefulWidget>
+    with ProductPostState {
   @override
   Widget build(BuildContext context) {
     return productPost == null
